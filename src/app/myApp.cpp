@@ -6,7 +6,7 @@ extern TFT_eSPI tft;
 void mqttTask(void *pvParameters);
 void otaTask(void *pvParameters);
 void lcdTask(void *pvParameters);
-
+QueueHandle_t xBinarySemaphore = xSemaphoreCreateBinary();
 void taskInit()
 {
 
@@ -57,18 +57,16 @@ void otaTask(void *pvParameters)
         vTaskDelay(50);
     }
 }
+extern int touchFlag;
 void lcdTask(void *pvParameters)
 {
-    uint16_t x, y;
+    uint16_t touchX=0,touchY=0;
     while (true)
     {
-        tft.getTouchRaw(&x, &y);
-  
-        Serial.printf("x: %i     ", x);
-
-        Serial.printf("y: %i     ", y);
-
-        Serial.printf("z: %i \n", tft.getTouchRawZ());
-        vTaskDelay(30);
+        if(xSemaphoreTake(xBinarySemaphore,portMAX_DELAY ))
+        {
+            tft.getTouch(&touchX, &touchY);
+            tft.fillCircle(touchX,touchY,2,TFT_RED);
+        }
     }
 }
