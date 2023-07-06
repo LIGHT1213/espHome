@@ -55,6 +55,10 @@
         "mqttconnect.h": "c",
         "pubsubclient.h": "c",
         "irremoteesp8266.h": "c",
-        "*.yml": "cpp"
+        "*.yml": "cpp",
+        "lv_port_disp_template.h": "c",
+        "lvgl.h": "c",
+        "lv_port_disp.h": "c",
+        "stdbool.h": "c"
     }
 }

@@ -1,5 +1,5 @@
 
-//#define DEBUG
+#define DEBUG
 #include <Arduino.h>
 #include <string>
 #include <ElegantOTA.h>
@@ -47,6 +47,8 @@ void setup()
   sersonInit();
   lcdInit();
   taskInit();
+  pinMode(25,OUTPUT);
+  digitalWrite(25,HIGH);
 }
 
 void loop()
