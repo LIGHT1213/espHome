@@ -1,7 +1,5 @@
 #include <Arduino.h>
-#include <lvgl.h>
 #include "myApp.h"
-#include "lv_port_disp.h"
 extern PubSubClient mqttClient;
 extern WebServer otaServer;
 extern TFT_eSPI tft;
@@ -65,7 +63,7 @@ void lcdTask(void *pvParameters)
 {
     while (true)
     {
-        lv_timer_handler();
+        //lv_timer_handler();
         vTaskDelay(30);
     }
 }

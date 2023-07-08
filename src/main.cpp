@@ -45,7 +45,7 @@ void setup()
   mqttInit();
   acControllerInit();
   sersonInit();
-  lcdInit();
+  //lcdInit();
   taskInit();
   pinMode(25,OUTPUT);
   digitalWrite(25,HIGH);
