@@ -59,6 +59,8 @@
         "lv_port_disp_template.h": "c",
         "lvgl.h": "c",
         "lv_port_disp.h": "c",
-        "stdbool.h": "c"
+        "stdbool.h": "c",
+        "shell_cmd_group.h": "c",
+        "shell_cpp.h": "c"
     }
 }

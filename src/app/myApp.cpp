@@ -1,12 +1,15 @@
 #include <Arduino.h>
 #include "myApp.h"
+#include "../src/shell/shell_cpp.h"
 extern PubSubClient mqttClient;
 extern WebServer otaServer;
 extern TFT_eSPI tft;
+extern Shell shell;
 void mqttTask(void *pvParameters);
 void otaTask(void *pvParameters);
 void lcdTask(void *pvParameters);
 
+//void shellTask(void *pvParameters);
 
 
 QueueHandle_t xBinarySemaphore = xSemaphoreCreateBinary();
@@ -29,13 +32,21 @@ void taskInit()
         NULL, 2 | portPRIVILEGE_BIT // 任务优先级, with 3 (configMAX_PRIORITIES - 1) 是最高的，0是最低的.
         ,
         NULL, ARDUINO_RUNNING_CORE);
+    // xTaskCreatePinnedToCore(
+    //     lcdTask, "lcdTask" // 任务名
+    //     ,
+    //     9000 // This stack size can be checked & adjusted by reading the Stack Highwater
+    //     ,
+    //     NULL, 2 | portPRIVILEGE_BIT // 任务优先级, with 3 (configMAX_PRIORITIES - 1) 是最高的，0是最低的.
+    //     ,
+    //     NULL, ARDUINO_RUNNING_CORE);
     xTaskCreatePinnedToCore(
-        lcdTask, "lcdTask" // 任务名
-        ,
-        9000 // This stack size can be checked & adjusted by reading the Stack Highwater
-        ,
-        NULL, 2 | portPRIVILEGE_BIT // 任务优先级, with 3 (configMAX_PRIORITIES - 1) 是最高的，0是最低的.
-        ,
+        shellTask, "shell"
+        , 
+        2048
+        , 
+        &shell, 10
+        , 
         NULL, ARDUINO_RUNNING_CORE);
 }
 void mqttTask(void *pvParameters)
@@ -57,13 +68,5 @@ void otaTask(void *pvParameters)
     {
         otaServer.handleClient();
         vTaskDelay(50);
-    }
-}
-void lcdTask(void *pvParameters)
-{
-    while (true)
-    {
-        //lv_timer_handler();
-        vTaskDelay(30);
     }
 }

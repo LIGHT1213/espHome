@@ -4,6 +4,7 @@
 #include <string>
 #include <ElegantOTA.h>
 #include <esp_sleep.h>
+#include "../src/app/shellPort.h"
 extern void sersonInit();
 extern void acControllerInit();
 extern void taskInit();
@@ -45,6 +46,7 @@ void setup()
   mqttInit();
   acControllerInit();
   sersonInit();
+  userShellInit();
   //lcdInit();
   taskInit();
   pinMode(25,OUTPUT);
