@@ -1,6 +1,8 @@
 #include "shellPort.h"
 #include <Arduino.h>
+#include <WiFi.h>
 Shell shell;
+WiFiClass WiFi;
 char shellBuffer[512];
 
 /**
@@ -36,4 +38,8 @@ void userShellInit(void)
     shellInit(&shell, shellBuffer, 512);
 
     
+}
+void printfMyIp()
+{
+    Serial.println(WiFi.localIP());
 }

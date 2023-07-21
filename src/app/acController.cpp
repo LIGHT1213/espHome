@@ -52,10 +52,30 @@ void acControl(String mqttContext)
       myHomeAc.setMode(kTcl112AcCool);
       myHomeAc.setTemp(acControlDoc["temp"].as<float>());
     }
+    else if(acControlDoc["mode"] == "dry")
+    {
+      myHomeAc.setMode(kTcl112AcDry);
+    }
+    else if(acControlDoc["mode"] == "heat")
+    {
+      myHomeAc.setMode(kTcl112AcHeat);
+    }
 
     if (acControlDoc["fan"] == "high")
     {
       myHomeAc.setFan(kTcl112AcFanHigh);
+    }
+    else if(acControlDoc["fan"] == "mid")
+    {
+      myHomeAc.setFan(kTcl112AcFanMed);
+    }
+    else if(acControlDoc["fan"] == "min")
+    {
+      myHomeAc.setFan(kTcl112AcFanLow);
+    }
+    else if(acControlDoc["fan"] == "auto")
+    {
+      myHomeAc.setFan(kTcl112AcFanAuto);
     }
   }
   else if (acControlDoc["switch"] == "off")

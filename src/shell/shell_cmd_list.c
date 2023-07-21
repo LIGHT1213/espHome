@@ -10,7 +10,7 @@
  */
 
 #include "shell.h"
-
+#include "../src/app/shellPort.h"
 #if SHELL_USING_CMD_EXPORT != 1
 
 extern int shellSetVar(char *name, int value);
@@ -84,6 +84,9 @@ const ShellCommand shellCommandList[] =
                    keys, shellKeys, list all key),
     SHELL_CMD_ITEM(SHELL_CMD_PERMISSION(0)|SHELL_CMD_TYPE(SHELL_TYPE_CMD_FUNC)|SHELL_CMD_DISABLE_RETURN,
                    clear, shellClear, clear console),
+    SHELL_CMD_ITEM(SHELL_CMD_PERMISSION(0)|SHELL_CMD_TYPE(SHELL_TYPE_CMD_FUNC)|SHELL_CMD_DISABLE_RETURN,
+                   showIp, printfMyIp, 输出IP),
+                   
     SHELL_CMD_ITEM(SHELL_CMD_PERMISSION(0)|SHELL_CMD_TYPE(SHELL_TYPE_CMD_FUNC)|SHELL_CMD_DISABLE_RETURN,
                    sh, SHELL_AGENCY_FUNC_NAME(shellRun), run command directly),
 #if SHELL_EXEC_UNDEF_FUNC == 1

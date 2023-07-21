@@ -61,6 +61,7 @@
         "lv_port_disp.h": "c",
         "stdbool.h": "c",
         "shell_cmd_group.h": "c",
-        "shell_cpp.h": "c"
+        "shell_cpp.h": "c",
+        "shellport.h": "c"
     }
 }
