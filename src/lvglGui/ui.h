@@ -10,16 +10,37 @@
 extern "C" {
 #endif
 
-#include <lvgl.h>
+#if defined __has_include
+#if __has_include("lvgl.h")
+#include "lvgl.h"
+#elif __has_include("lvgl/lvgl.h")
+#include "lvgl/lvgl.h"
+#else
+#include "lvgl.h"
+#endif
+#else
+#include "lvgl.h"
+#endif
 
-//#include "lv_i18n.h"
 #include "ui_helpers.h"
 #include "ui_events.h"
 // SCREEN: ui_Screen1
 void ui_Screen1_screen_init(void);
 extern lv_obj_t * ui_Screen1;
-extern lv_obj_t * ui_Button1;
+extern lv_obj_t * ui_localLabel;
+void ui_event_page2Button(lv_event_t * e);
+extern lv_obj_t * ui_page2Button;
+extern lv_obj_t * ui_Spinner1;
+extern lv_obj_t * ui_Arc5;
+// SCREEN: ui_Screen2
+void ui_Screen2_screen_init(void);
+extern lv_obj_t * ui_Screen2;
+void ui_event_Button7(lv_event_t * e);
+extern lv_obj_t * ui_Button7;
+extern lv_obj_t * ui_Arc4;
 extern lv_obj_t * ui____initial_actions0;
+
+LV_FONT_DECLARE(ui_font_chineseFont);
 
 void ui_init(void);
 

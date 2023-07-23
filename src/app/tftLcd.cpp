@@ -2,30 +2,31 @@
 
 #include <TFT_eSPI.h> // Include the graphics library (this includes the sprite functions)
 #include <lvgl.h>
-static const uint16_t screenWidth  = 320;
-static const uint16_t screenHeight = 240;
+#include "../src/lvglGui/ui.h"
+static const uint16_t screenWidth  = 240;
+static const uint16_t screenHeight = 320;
 static lv_disp_draw_buf_t draw_buf;
 // Pause in milliseconds to set scroll speed
 #define WAIT 0
 TFT_eSPI tft=TFT_eSPI();
-ICACHE_RAM_ATTR void touchIrq();
-void touch_calibrate();
 void my_disp_flush( lv_disp_drv_t *disp, const lv_area_t *area, lv_color_t *color_p );
 void my_touchpad_read( lv_indev_drv_t * indev_driver, lv_indev_data_t * data );
-static uint16_t calData[5];
-int touchFlag=0;
+void touch_calibrate();
+uint16_t calData[5] = { 413, 3156, 357, 3289, 2 };
 extern QueueHandle_t xBinarySemaphore;
 void lv_my_widgets(void);
 void lcdInit()
 {
+    lv_indev_drv_t indev_drv;                  /*Descriptor of a input device driver*/
+
     TFT_eSprite img = TFT_eSprite(&tft); // Create Sprite object "img" with pointer to "tft" object
                                          //                                    // the pointer is used by pushSprite() to push it onto the TFT
     tft.init();
-    tft.setRotation(1);
+    tft.setRotation(0);
 
     tft.fillScreen(TFT_BLUE);
-    touch_calibrate();
-    tft.setTouch(calData);
+    //touch_calibrate();
+    //tft.setTouch((uint16_t *)calData);
     lv_init();
 
     static lv_disp_draw_buf_t draw_buf_dsc_3;
@@ -45,10 +46,9 @@ void lcdInit()
 
     /*Used to copy the buffer's content to the display*/
     disp_drv.flush_cb = my_disp_flush;
-
+    disp_drv.rotated = LV_DISP_ROT_NONE;
     /*Set a display buffer*/
     disp_drv.draw_buf = &draw_buf_dsc_3;
-
     /*Required for Example 3)*/
     //disp_drv.full_refresh = 1;
 
@@ -58,7 +58,13 @@ void lcdInit()
     //disp_drv.gpu_fill_cb = gpu_fill;
 
     /*Finally register the driver*/
+
+    lv_indev_drv_init(&indev_drv);             /*Basic initialization*/
     lv_disp_drv_register(&disp_drv);
+    indev_drv.type = LV_INDEV_TYPE_POINTER;    /*Touch pad is a pointer-like device*/
+    indev_drv.read_cb = my_touchpad_read;      /*Set your driver function*/
+    lv_indev_drv_register(&indev_drv);         /*Finally register the driver*/
+    ui_init();
     #if 0
     /* Create simple label */
     lv_obj_t *label = lv_label_create( lv_scr_act() );
@@ -117,12 +123,6 @@ void my_touchpad_read( lv_indev_drv_t * indev_driver, lv_indev_data_t * data )
         /*Set the coordinates*/
         data->point.x = touchX;
         data->point.y = touchY;
-
-        // Serial.print( "Data x " );
-        // Serial.println( touchX );
-
-        // Serial.print( "Data y " );
-        // Serial.println( touchY );
     }
 }
 void touch_calibrate()
@@ -142,7 +142,7 @@ void touch_calibrate()
   tft.setTextFont(1);
   tft.println();
 
-  tft.calibrateTouch(calData, TFT_MAGENTA, TFT_BLACK, 15);
+  tft.calibrateTouch((uint16_t*)calData, TFT_MAGENTA, TFT_BLACK, 15);
 
   Serial.println(); Serial.println();
   Serial.println("// Use this calibration code in setup():");

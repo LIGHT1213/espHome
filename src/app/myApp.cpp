@@ -1,7 +1,8 @@
 #include <Arduino.h>
 #include "myApp.h"
+#include <lvgl.h>
 #include "../src/shell/shell_cpp.h"
-#include "FreeRTOSConfig.h"
+// #include "FreeRTOSConfig.h"
 extern PubSubClient mqttClient;
 extern WebServer otaServer;
 extern TFT_eSPI tft;
@@ -36,7 +37,7 @@ void taskInit()
     xTaskCreatePinnedToCore(
         lcdTask, "lcdTask" // 任务名
         ,
-        9000 // This stack size can be checked & adjusted by reading the Stack Highwater
+        20480 // This stack size can be checked & adjusted by reading the Stack Highwater
         ,
         NULL, 2 | portPRIVILEGE_BIT // 任务优先级, with 3 (configMAX_PRIORITIES - 1) 是最高的，0是最低的.
         ,
@@ -91,7 +92,7 @@ void lcdTask(void *pvParameters)
 {
     while (true)
     {
-        
+        lv_task_handler();
         vTaskDelay(30);
     }
 }

@@ -1,6 +1,7 @@
 #include "shellPort.h"
 #include <Arduino.h>
 #include <WiFi.h>
+
 Shell shell;
 WiFiClass WiFi;
 char shellBuffer[512];
