@@ -31,7 +31,10 @@ extern lv_obj_t * ui_localLabel;
 void ui_event_page2Button(lv_event_t * e);
 extern lv_obj_t * ui_page2Button;
 extern lv_obj_t * ui_Spinner1;
-extern lv_obj_t * ui_Arc5;
+extern lv_obj_t * ui_iPLabel;
+extern lv_obj_t * ui_weatherLabel;
+extern lv_obj_t * ui_Label3;
+extern lv_obj_t * ui_Label4;
 // SCREEN: ui_Screen2
 void ui_Screen2_screen_init(void);
 extern lv_obj_t * ui_Screen2;

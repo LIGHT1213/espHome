@@ -13,8 +13,8 @@ void ui_Screen1_screen_init(void)
     ui_localLabel = lv_label_create(ui_Screen1);
     lv_obj_set_width(ui_localLabel, LV_SIZE_CONTENT);   /// 1
     lv_obj_set_height(ui_localLabel, LV_SIZE_CONTENT);    /// 1
-    lv_obj_set_x(ui_localLabel, -136);
-    lv_obj_set_y(ui_localLabel, -104);
+    lv_obj_set_x(ui_localLabel, -101);
+    lv_obj_set_y(ui_localLabel, -146);
     lv_obj_set_align(ui_localLabel, LV_ALIGN_CENTER);
     lv_label_set_text(ui_localLabel, "地址");
     lv_obj_set_style_text_font(ui_localLabel, &ui_font_chineseFont, LV_PART_MAIN | LV_STATE_DEFAULT);
@@ -22,9 +22,8 @@ void ui_Screen1_screen_init(void)
     ui_page2Button = lv_btn_create(ui_Screen1);
     lv_obj_set_width(ui_page2Button, 55);
     lv_obj_set_height(ui_page2Button, 24);
-    lv_obj_set_x(ui_page2Button, 80);
-    lv_obj_set_y(ui_page2Button, 141);
-    lv_obj_set_align(ui_page2Button, LV_ALIGN_CENTER);
+    lv_obj_set_x(ui_page2Button, 176);
+    lv_obj_set_y(ui_page2Button, 289);
     lv_obj_add_flag(ui_page2Button, LV_OBJ_FLAG_SCROLL_ON_FOCUS);     /// Flags
     lv_obj_clear_flag(ui_page2Button, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
 
@@ -36,10 +35,37 @@ void ui_Screen1_screen_init(void)
     lv_obj_set_align(ui_Spinner1, LV_ALIGN_CENTER);
     lv_obj_clear_flag(ui_Spinner1, LV_OBJ_FLAG_CLICKABLE);      /// Flags
 
-    ui_Arc5 = lv_arc_create(ui_Screen1);
-    lv_obj_set_width(ui_Arc5, 150);
-    lv_obj_set_height(ui_Arc5, 150);
-    lv_obj_set_align(ui_Arc5, LV_ALIGN_CENTER);
+    ui_iPLabel = lv_label_create(ui_Screen1);
+    lv_obj_set_width(ui_iPLabel, LV_SIZE_CONTENT);   /// 1
+    lv_obj_set_height(ui_iPLabel, LV_SIZE_CONTENT);    /// 1
+    lv_obj_set_x(ui_iPLabel, 4);
+    lv_obj_set_y(ui_iPLabel, 26);
+    lv_label_set_text(ui_iPLabel, "ip:");
+
+    ui_weatherLabel = lv_label_create(ui_Screen1);
+    lv_obj_set_width(ui_weatherLabel, LV_SIZE_CONTENT);   /// 1
+    lv_obj_set_height(ui_weatherLabel, LV_SIZE_CONTENT);    /// 1
+    lv_obj_set_x(ui_weatherLabel, 4);
+    lv_obj_set_y(ui_weatherLabel, 47);
+    lv_label_set_text(ui_weatherLabel, "天气");
+    lv_obj_set_style_text_font(ui_weatherLabel, &ui_font_chineseFont, LV_PART_MAIN | LV_STATE_DEFAULT);
+
+    ui_Label3 = lv_label_create(ui_Screen1);
+    lv_obj_set_width(ui_Label3, LV_SIZE_CONTENT);   /// 1
+    lv_obj_set_height(ui_Label3, LV_SIZE_CONTENT);    /// 1
+    lv_obj_set_x(ui_Label3, 4);
+    lv_obj_set_y(ui_Label3, 67);
+    lv_label_set_text(ui_Label3, "室温");
+    lv_obj_set_style_text_font(ui_Label3, &ui_font_chineseFont, LV_PART_MAIN | LV_STATE_DEFAULT);
+
+    ui_Label4 = lv_label_create(ui_Screen1);
+    lv_obj_set_width(ui_Label4, LV_SIZE_CONTENT);   /// 1
+    lv_obj_set_height(ui_Label4, LV_SIZE_CONTENT);    /// 1
+    lv_obj_set_x(ui_Label4, -101);
+    lv_obj_set_y(ui_Label4, -62);
+    lv_obj_set_align(ui_Label4, LV_ALIGN_CENTER);
+    lv_label_set_text(ui_Label4, "照度");
+    lv_obj_set_style_text_font(ui_Label4, &ui_font_chineseFont, LV_PART_MAIN | LV_STATE_DEFAULT);
 
     lv_obj_add_event_cb(ui_page2Button, ui_event_page2Button, LV_EVENT_ALL, NULL);
 

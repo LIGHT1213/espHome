@@ -12,7 +12,7 @@ TFT_eSPI tft=TFT_eSPI();
 void my_disp_flush( lv_disp_drv_t *disp, const lv_area_t *area, lv_color_t *color_p );
 void my_touchpad_read( lv_indev_drv_t * indev_driver, lv_indev_data_t * data );
 void touch_calibrate();
-uint16_t calData[5] = { 413, 3156, 357, 3289, 2 };
+uint16_t calData[5] = { 513, 3010, 363, 3283, 2};
 extern QueueHandle_t xBinarySemaphore;
 void lv_my_widgets(void);
 void lcdInit()
@@ -26,13 +26,13 @@ void lcdInit()
 
     tft.fillScreen(TFT_BLUE);
     //touch_calibrate();
-    //tft.setTouch((uint16_t *)calData);
+    tft.setTouch((uint16_t *)calData);
     lv_init();
 
     static lv_disp_draw_buf_t draw_buf_dsc_3;
-    static lv_color_t buf_3_1[screenWidth * screenHeight/10];            /*A screen sized buffer*/
+    static lv_color_t buf_3_1[screenWidth * screenHeight/6];            /*A screen sized buffer*/
     lv_disp_draw_buf_init(&draw_buf_dsc_3, buf_3_1, NULL,
-                          screenWidth * screenHeight / 10);   /*Initialize the display buffer*/
+                          screenWidth * screenHeight / 6);   /*Initialize the display buffer*/
 
     /*Initialize the display*/
     static lv_disp_drv_t disp_drv;                         /*Descriptor of a display driver*/
@@ -41,8 +41,8 @@ void lcdInit()
     /*Set up the functions to access to your display*/
 
     /*Set the resolution of the display*/
-    disp_drv.hor_res = screenHeight;
-    disp_drv.ver_res = screenWidth;
+    disp_drv.hor_res = screenWidth;
+    disp_drv.ver_res = screenHeight;
 
     /*Used to copy the buffer's content to the display*/
     disp_drv.flush_cb = my_disp_flush;
@@ -123,6 +123,9 @@ void my_touchpad_read( lv_indev_drv_t * indev_driver, lv_indev_data_t * data )
         /*Set the coordinates*/
         data->point.x = touchX;
         data->point.y = touchY;
+        Serial.printf("x:%d\r\n",touchX);
+        Serial.printf("y:%d\r\n",touchY);
+        Serial.printf("\r\n");
     }
 }
 void touch_calibrate()

@@ -15,7 +15,10 @@ lv_obj_t * ui_localLabel;
 void ui_event_page2Button(lv_event_t * e);
 lv_obj_t * ui_page2Button;
 lv_obj_t * ui_Spinner1;
-lv_obj_t * ui_Arc5;
+lv_obj_t * ui_iPLabel;
+lv_obj_t * ui_weatherLabel;
+lv_obj_t * ui_Label3;
+lv_obj_t * ui_Label4;
 
 // SCREEN: ui_Screen2
 void ui_Screen2_screen_init(void);
